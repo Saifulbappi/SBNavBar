@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "TestLaunchingVC.h"
+
 @interface AppDelegate ()
 
 @end
@@ -19,13 +19,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    TestLaunchingVC * vc = [sb instantiateInitialViewController];
-
-    UINavigationController * nv = [[UINavigationController alloc] initWithRootViewController:vc];
-    nv.navigationBar.translucent=NO;
-    self.window.rootViewController = nv;
-    [self.window makeKeyAndVisible];
+//    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+//    TestLaunchingVC * vc = [sb instantiateInitialViewController];
+//
+//    UINavigationController * nv = [[UINavigationController alloc] initWithRootViewController:vc];
+//    nv.navigationBar.translucent=NO;
+//    self.window.rootViewController = nv;
+//    [self.window makeKeyAndVisible];
     
     
     return YES;

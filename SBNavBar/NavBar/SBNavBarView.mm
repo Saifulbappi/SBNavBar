@@ -9,12 +9,7 @@
 #import "SBNavBarView.h"
 #import "SBCtBlob.h"
 
-#define  BAR_CONTAINER_HEIGHT                        44
-#define  DEFAULT_STATUSBAR_HEIGHT                    22
-#define  DEFAULT_TOPCONTAINER_HEIGHT                 10
-#define  DEFAULT_BTMCONTAINER_HEIGHT                 10
-#define  DEFUALT_BARCONTAINER_VERTICAL_PADDING       2
-#define  DEFUALT_BARCONTAINER_HORIZONTAL_PADDING     1
+
 
 
 /**
@@ -83,6 +78,12 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     //BAR CONTAINER
     SBCtBlob * barContainerCtBlob; // This Blob Constraints is related to SBNavBarView
     
+    //BARIMAGEVIEW
+    /**
+     barImageView is a background Image of BarContainer.. if BarContainer Constraints are changed.. Then BarImageView Constraints MUST be changed accordingly;
+     */
+    SBCtBlob * barImageCtBlob;// This Blob Constraints is related to SBNavBarView
+    
     //LEFT BAR CONTAINER
     SBCtBlob * leftBarContainerCtBlob;// This Blob Constraints is related to BarContainer
     
@@ -146,6 +147,16 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     NSLayoutConstraint * barContainerRightCt;
     NSLayoutConstraint * barContainerBtmCt;
     
+    
+    /**
+     BAR IMAGE CONSTRAINTS
+     */
+    
+    NSLayoutConstraint * barImageLeftCt;
+    NSLayoutConstraint * barImageTopCt;
+    NSLayoutConstraint * barImageRightCt;
+    NSLayoutConstraint * barImageBtmCt;
+    
     /**
      LEFT BAR CONTAINER CONSTRAINTS
      */
@@ -201,9 +212,6 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     //[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     
     
-    SBLog(@"SBNavBarView init");
-    
-    
     /**
              view inits
      */
@@ -211,8 +219,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     
     
     [self attachSubViews];
-    
-    
+    [self configureStandardBarImage];
     
     /**
              Variable inits
@@ -269,13 +276,13 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     middleBarContainerView = [[UIView alloc] init];
     btmContainerView = [[UIView alloc] init];
     
-    statusBarView.backgroundColor = [UIColor colorWithRed:2/255.0 green:39/255.0 blue:31/255.0 alpha:0.7];
-    topContainerView.backgroundColor = [UIColor colorWithRed:56/255.0 green:115/255.0 blue:167/255.0 alpha:1.0];
-    barContainerView.backgroundColor = [UIColor colorWithRed:6/255.0 green:76/255.0 blue:63/255.0 alpha:1.0];
-    leftBarContainerView.backgroundColor = [UIColor colorWithRed:183/255.0 green:29/255.0 blue:36/255.0 alpha:1.0];
-    middleBarContainerView.backgroundColor = [UIColor colorWithRed:143/255.0 green:193/255.0 blue:89/255.0 alpha:1.0];
-    rightBarContainerView.backgroundColor = [UIColor colorWithRed:86/255.0 green:198/255.0 blue:210/255.0 alpha:1.0];
-    btmContainerView.backgroundColor = [UIColor colorWithRed:21/255.0 green:150/255.0 blue:136/255.0 alpha:1.0];
+    statusBarView.backgroundColor = STATUSBAR_BACK_COLOR;
+    topContainerView.backgroundColor = TOP_CONTAINER_BACK_COLOR;
+    barContainerView.backgroundColor = BAR_CONTAINER_BACK_COLOR;
+    leftBarContainerView.backgroundColor = LEFTBAR_CONTAINER_BACK_COLOR;
+    middleBarContainerView.backgroundColor =MIDBAR_CONTAINER_BACK_COLOR ;
+    rightBarContainerView.backgroundColor = RIGHTBAR_CONTAINER_BACK_COLOR;
+    btmContainerView.backgroundColor =BTM_CONTAINER_BACK_COLOR ;
     
     
     
@@ -284,28 +291,22 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 
     
     //MUST INIT THE WIDTHS OF THE left,middle and rightBarContainerViews
-    [self setUpBarContainerWidthPoint:0.33f middleBarWidthPoint:0.33f];
+    [self setUpBarContainerWidthPoint:0.33f middleBarWidthPoint:0.33f];//Default
     
     
     [barContainerView addSubview:leftBarContainerView];
     [barContainerView addSubview:middleBarContainerView];
     [barContainerView addSubview:rightBarContainerView];
 
+    [self addSubview:barImageView];
     [self addSubview:barContainerView];
+    
     [self addSubview:btmContainerView];
     
 }
 
 
--(void)removeAllConstraintsFromSbNav:(UIView *)view// All Constraint of the UIView and its childs are cleared
-{
-    
-    [view removeConstraints:view.constraints];
-    for (UIView * uv in [view subviews]) {
-        [self removeAllConstraintsFromSbNav:uv];
-    }
-    
-}
+
 
 #pragma -mark
 #pragma -mark CONSTRAINTS HANDLING
@@ -449,6 +450,63 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     
     
 }
+
+-(void)attachBarImageConstraints
+{
+    /**
+     BTMCONTAINER BAR CONSTRAINTS
+     */
+    
+    barImageView.translatesAutoresizingMaskIntoConstraints=NO;
+    barImageCtBlob = [[SBCtBlob alloc] initwithLeft:0 topPadding:0 rightPadding:0 btmPadding:-defaultBtmContainerHeight];
+    
+    barImageLeftCt = [NSLayoutConstraint constraintWithItem:barImageView
+                                                      attribute:NSLayoutAttributeLeft
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self
+                                                      attribute:NSLayoutAttributeLeft
+                                                     multiplier:1.0
+                                                       constant:barImageCtBlob.leftPadding];
+    
+    barImageTopCt = [NSLayoutConstraint constraintWithItem:barImageView
+                                                     attribute:NSLayoutAttributeTop
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:topContainerView
+                                                     attribute:NSLayoutAttributeBottom
+                                                    multiplier:1.0
+                                                      constant:barImageCtBlob.topPadding];
+    
+    barImageRightCt = [NSLayoutConstraint constraintWithItem:barImageView
+                                                       attribute:NSLayoutAttributeRight
+                                                       relatedBy:NSLayoutRelationEqual
+                                                          toItem:self
+                                                       attribute:NSLayoutAttributeRight
+                                                      multiplier:1.0
+                                                        constant:barImageCtBlob.rightPadding];
+    
+    barImageBtmCt = [NSLayoutConstraint constraintWithItem:barImageView
+                                                     attribute:NSLayoutAttributeBottom
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeBottom
+                                                    multiplier:1.0
+                                                      constant:barImageCtBlob.btmPadding];
+    
+    
+    
+    
+    
+    [self addConstraints:@[barImageLeftCt,barImageTopCt,barImageRightCt,barImageBtmCt]];
+    
+    
+    
+    
+    
+    
+    
+}
+
+
 -(void)attachBarContainerConstraints
 {
     /**
@@ -514,8 +572,6 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     leftBarContainerCtBlob = [[SBCtBlob alloc] initwithLeft:2*defaultBarContainerHorizontalPadding topPadding:defaultBarContainerVerticalPadding rightPadding:-(defaultBarContainerHorizontalPadding*4 + barContainerMiddlerBarWidth+barContainerRightBarWidth) btmPadding:-defaultBarContainerVerticalPadding];
 
     
-    //leftBarContainerCtBlob = [[SBCtBlob alloc] initwithLeft:0 topPadding:0 rightPadding:20 btmPadding:0];
-    SBLog(@"attachLeftBarContainerConstraints %@",[leftBarContainerCtBlob debugDescription]);
     
     leftBarContainerLeftCt = [NSLayoutConstraint constraintWithItem:leftBarContainerView
                                                       attribute:NSLayoutAttributeLeft
@@ -562,8 +618,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     middleBarContainerCtBlob = [[SBCtBlob alloc] initwithLeft:3*defaultBarContainerHorizontalPadding+barContainerLeftBarWidth topPadding:defaultBarContainerVerticalPadding rightPadding:-(defaultBarContainerHorizontalPadding*3 + barContainerRightBarWidth) btmPadding:-defaultBarContainerVerticalPadding];
     
     
-    //leftBarContainerCtBlob = [[SBCtBlob alloc] initwithLeft:0 topPadding:0 rightPadding:20 btmPadding:0];
-    SBLog(@"attachMiddleBarContainerConstraints %@",[leftBarContainerCtBlob debugDescription]);
+   
     
     middleBarContainerLeftCt = [NSLayoutConstraint constraintWithItem:middleBarContainerView
                                                           attribute:NSLayoutAttributeLeft
@@ -610,8 +665,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     rightBarContainerCtBlob = [[SBCtBlob alloc] initwithLeft:4*defaultBarContainerHorizontalPadding+barContainerLeftBarWidth+barContainerMiddlerBarWidth topPadding:defaultBarContainerVerticalPadding rightPadding:-(defaultBarContainerHorizontalPadding*1) btmPadding:-defaultBarContainerVerticalPadding];
     
     
-    //leftBarContainerCtBlob = [[SBCtBlob alloc] initwithLeft:0 topPadding:0 rightPadding:20 btmPadding:0];
-    SBLog(@"attachRightBarContainerConstraints %@",[leftBarContainerCtBlob debugDescription]);
+    
     
     rightBarContainerLeftCt = [NSLayoutConstraint constraintWithItem:rightBarContainerView
                                                             attribute:NSLayoutAttributeLeft
@@ -703,11 +757,12 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 -(void)attachConstraints
 {
 
-    SBLog(@"DINGOLA %@ %@",NSStringFromClass([self class]),NSStringFromClass([self.superview class]));
+
     [self attachSBNavBarSelfConstraints];
     [self attachStatusBarConstraints];
     [self attachTopContainerConstraints];
     [self attachBarContainerConstraints];
+    [self attachBarImageConstraints];
     [self attachBtmContainerConstraints];
     
     
@@ -725,21 +780,112 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 //    NSArray *selfHorizontalCts =[NSLayoutConstraint constraintsWithVisualFormat:selfHorizontalCtString options:0 metrics:nil views:sbNavBarViewsDict];
 //    NSArray *selfVerticalCts =[NSLayoutConstraint constraintsWithVisualFormat:selfVerticalCtString options:0 metrics:nil views:sbNavBarViewsDict];
 //
-//    SBLog(@"futttialaaa");
 //    [self.superview addConstraints:selfHorizontalCts];
 //    [self.superview addConstraints:selfVerticalCts];
     
-    //SBLog(@"%@ dimbo constraints %@  liptok",[mainViewCtBlob debugDescription],[self.superview constraints]);
     
     self.backgroundColor = [UIColor blueColor];
  
-    SBLog(@"attachConstraints Called");
+   
 }
+
+
+/**
+   ViewArray should Contain--
+     @{
+         itemAttribute,
+         relatedBy,
+         toItem,
+         toitemAttribute,
+         multiplier
+ 
+     }
+ */
+-(void)attachConstraintForView:(UIView*)uv
+                  withSbCTBlob:(SBCtBlob *)blob
+                andLeftViewArr:(NSArray*)leftViewArr
+                 andTopViewArr:(NSArray*)topViewArr
+               andRightViewArr:(NSArray *)rightViewArr
+                 andBtmViewArr:(NSArray *)btmViewArr
+                   andWidthArr:(NSArray *)widthArr
+                  andHeightArr:(NSArray *)heightArr
+                  andSuperView:(UIView *)superView
+{
+    uv.translatesAutoresizingMaskIntoConstraints=NO;
+    NSLayoutConstraint* uvLeftCt, * uvTopCt, * uvRightCt, * uvBtmCt,*uvWidthCt,*uvHeightCt;
+    
+    
+    if (leftViewArr) {
+        uvLeftCt = [NSLayoutConstraint constraintWithItem:uv
+                                                attribute:(NSLayoutAttribute)[leftViewArr[0] integerValue]
+                                                relatedBy:(NSLayoutRelation)[leftViewArr[1] integerValue]
+                                                   toItem:leftViewArr[2]
+                                                attribute:(NSLayoutAttribute)[leftViewArr[3] integerValue]
+                                               multiplier:[leftViewArr[4] floatValue]
+                                                 constant:blob.leftPadding];
+        [superView addConstraint:uvLeftCt];
+    }
+    if (topViewArr) {
+        uvTopCt = [NSLayoutConstraint constraintWithItem:uv
+                                               attribute:(NSLayoutAttribute)[topViewArr[0] integerValue]
+                                               relatedBy:(NSLayoutRelation)[topViewArr[1] integerValue]
+                                                  toItem:topViewArr[2]
+                                               attribute:(NSLayoutAttribute)[topViewArr[3] integerValue]
+                                              multiplier:[topViewArr[4] floatValue]
+                                                constant:blob.topPadding];
+        [superView addConstraint:uvTopCt];
+    }
+    if (rightViewArr) {
+        uvRightCt = [NSLayoutConstraint constraintWithItem:uv
+                                                 attribute:(NSLayoutAttribute)[rightViewArr[0] integerValue]
+                                                 relatedBy:(NSLayoutRelation)[rightViewArr[1] integerValue]
+                                                    toItem:rightViewArr[2]
+                                                 attribute:(NSLayoutAttribute)[rightViewArr[3] integerValue]
+                                                multiplier:[rightViewArr[4] floatValue]
+                                                  constant:-blob.rightPadding];
+        [superView addConstraint:uvRightCt];
+    }
+    
+    if (btmViewArr) {
+        uvBtmCt = [NSLayoutConstraint constraintWithItem:uv
+                                               attribute:(NSLayoutAttribute)[btmViewArr[0] integerValue]
+                                               relatedBy:(NSLayoutRelation)[btmViewArr[1] integerValue]
+                                                  toItem:btmViewArr[2]
+                                               attribute:(NSLayoutAttribute)[btmViewArr[3] integerValue]
+                                              multiplier:[btmViewArr[4] floatValue]
+                                                constant:-blob.btmPadding];
+        [superView addConstraint:uvBtmCt];
+    }
+    if(widthArr)
+    {
+        uvWidthCt = [NSLayoutConstraint constraintWithItem:uv
+                                               attribute:(NSLayoutAttribute)[widthArr[0] integerValue]
+                                               relatedBy:(NSLayoutRelation)[widthArr[1] integerValue]
+                                                  toItem:nil
+                                               attribute:(NSLayoutAttribute)[widthArr[3] integerValue]
+                                              multiplier:[widthArr[4] floatValue]
+                                                constant:blob.width];
+        [superView addConstraint:uvWidthCt];
+    }
+    if (heightArr) {
+        uvHeightCt =[NSLayoutConstraint constraintWithItem:uv
+                                                 attribute:(NSLayoutAttribute)[heightArr[0] integerValue]
+                                                 relatedBy:(NSLayoutRelation)[heightArr[1] integerValue]
+                                                    toItem:nil
+                                                 attribute:(NSLayoutAttribute)[heightArr[3] integerValue]
+                                                multiplier:[heightArr[4] floatValue]
+                                                  constant:blob.height];
+        [superView addConstraint:uvHeightCt];
+    }
+
+    
+}
+
 
 -(void)updateConstraints
 {
     [super updateConstraints];
-    SBLog(@"updateConstraints Called");
+   
     [self updateNeededCtBlobs];
     
     mainViewLeftCt.constant = mainViewCtBlob.leftPadding;
@@ -771,7 +917,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 -(void)updateNeededCtBlobs
 {
     mainViewCtBlob.btmPadding =-([UIScreen mainScreen].bounds.size.height-((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight));
-    SBLog(@"(defaultBarContainerHeight+statusBarHeight) %d",(defaultBarContainerHeight+statusBarHeight));
+    
     
     
     leftBarContainerCtBlob = [[SBCtBlob alloc] initwithLeft:2*defaultBarContainerHorizontalPadding topPadding:defaultBarContainerVerticalPadding rightPadding:-(defaultBarContainerHorizontalPadding*4 + barContainerMiddlerBarWidth+barContainerRightBarWidth) btmPadding:-defaultBarContainerVerticalPadding];
@@ -801,7 +947,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    SBLog(@"awakeFromNib");
+   
     
 }
 
@@ -812,19 +958,11 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 
 #pragma -mark Helper Methods
 
-/**
- This Method sets up the leftBar,Middle Bar and rightBar widths..
- 
- left, middle and right BarWidthPoint are as such
- leftBarContainerWidthPoint+middleBarWidthPoint+rightBarWidthPoint = 1.0
- 
- So the point should be given according to the wanted width of each bar respective to  defaultBarContainerWidth
- */
 
 -(void)setUpBarContainerWidthPoint:(float)leftBarContainerWidthPoint
                middleBarWidthPoint:(float)middleBarWidthPoint
 {
-    
+    NSAssert(leftBarContainerWidthPoint+middleBarWidthPoint<=1.0, @"\n\n\n ***** Invalid Width Point set!!! *****\n\n");
     
     currentBarContainerLeftBarWidthPoint=leftBarContainerWidthPoint;
     currentBarContainerMiddlerBarWidthPoint = middleBarWidthPoint;
@@ -833,43 +971,314 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     barContainerMiddlerBarWidth = (int)(currentBarContainerMiddlerBarWidthPoint* defaultBarContainerWidth);
     barContainerRightBarWidth = defaultBarContainerWidth-barContainerMiddlerBarWidth-barContainerLeftBarWidth ;
     
-    SBLog(@"barContainerLeftBarWidth %d %d %d",barContainerLeftBarWidth,barContainerMiddlerBarWidth,barContainerRightBarWidth);
     
+    
+    
+}
+
+-(UIView *)getContainerViewForContainerType:(SBContainerType)containerType
+{
+    UIView * retView = [[UIView alloc] init];
+    
+    
+    switch (containerType) {
+        case SBContainerTypeStatusBar:
+            retView  = statusBarView;
+            break;
+            
+        case SBContainerTypeTopContainer:
+            retView = topContainerView;
+            break;
+        case SBContainerTypeBarImage:
+            retView = barImageView;
+            break;
+        case SBContainerTypeBarContainer:
+            retView = barContainerView;
+            break;
+        case SBContainerTypeLeftBarContainer:
+            retView = leftBarContainerView;
+            break;
+        case SBContainerTypeMiddleBarContainer:
+            retView = middleBarContainerView;
+            break;
+        case SBContainerTypeRightBarContainer:
+            retView = rightBarContainerView;
+            break;
+        case SBContainerTypeBtmContainer:
+            retView = btmContainerView;
+            break;
+            
+            
+        default:
+            break;
+    }
+    
+    return retView;
     
 }
 
 
-#pragma -mark Getters
 
--(NSMutableDictionary *)getLeftBarContainerToCustomize
+
+-(void)setupBarContainerWithViews:(NSArray *)views
+                 forContainerType:(SBContainerType)containerType
+                        alignment:(SBAlignment)alignment
+                isTopverticalWall:(bool)isTop/// if isTop==true the top is the vertical wall else- bottom
 {
     
-    NSMutableDictionary  * retDict = [NSMutableDictionary dictionary];
-    
-    [retDict setObject:leftBarContainerView forKey:@"view"];
-    [retDict setObject:[NSNumber numberWithInt:barContainerLeftBarWidth] forKey:@"width"];
-    [retDict setObject:[NSNumber numberWithInt:defaultBarContainerHeight-2*defaultBarContainerVerticalPadding] forKey:@"height"];
     
     
-    return retDict;
+    UIView * containerView = [self getContainerViewForContainerType:containerType];
     
-}
--(void)setLeftBarContainer:(UIView *)uv
-{
-    [leftBarContainerView removeFromSuperview];
-    leftBarContainerView = uv;
-    [barContainerView addSubview:leftBarContainerView];
-    [self attachLeftBarContainerConstraints];
+    //NSDictionary * getInfoOfContinerView = [self getContainerInfo:containerType];
     
     
-    leftBarContainerView.clipsToBounds = YES;
+    int viewCount=(int)[views count];
+    
+    UIView * leftView,*rightView;
+    
+    for (int i=0; i<viewCount; i++) {
+        [containerView addSubview:[views objectAtIndex:i][0]];
+    }
+    
+    int midx = (viewCount & 1)? viewCount>>1:(viewCount>>1)-1 ; //finding mid View for CenterAlignment
+        
+    for (int i=0; i<viewCount; i++)
+    {
+        NSArray * arrayAtIndex = [views objectAtIndex:i];
+        
+        //NSAssert((([arrayAtIndex count]!=2) && [arrayAtIndex[1]isKindOfClass:[SBCtBlob class]]), @"\n\n###Invalid! setupBarContainerWithViews Parameters!###\n");
+        
+      
+        leftView = (i==0) ? containerView :[views objectAtIndex:i-1][0];
+        rightView = (i==viewCount-1)?containerView:[views objectAtIndex:i+1][0];
+        
+        NSMutableArray * leftAttributeArr,*topAttributeArr, *rightAttributeArr, *btmAttributeArr,*widthAttributeArr,*heightAttributeArr;
+        
+        leftAttributeArr = [NSMutableArray arrayWithObjects:[NSNumber numberWithInteger:NSLayoutAttributeLeft]
+                                         ,[NSNumber numberWithInteger:NSLayoutRelationEqual]
+                                         ,leftView
+                                         ,[NSNumber numberWithInteger:NSLayoutAttributeRight]
+                                         ,[NSNumber numberWithFloat:1.0]
+                                         ,nil];
+        topAttributeArr = [NSMutableArray arrayWithObjects:[NSNumber numberWithInteger:NSLayoutAttributeTop]
+                                             ,[NSNumber numberWithInteger:NSLayoutRelationEqual]
+                                             ,containerView
+                                             ,[NSNumber numberWithInteger:NSLayoutAttributeTop]
+                                             ,[NSNumber numberWithFloat:1.0]
+                                             ,nil];
+        rightAttributeArr = [NSMutableArray arrayWithObjects:[NSNumber numberWithInteger:NSLayoutAttributeRight]
+                                            ,[NSNumber numberWithInteger:NSLayoutRelationEqual]
+                                            ,rightView
+                                            ,[NSNumber numberWithInteger:NSLayoutAttributeLeft]
+                                            ,[NSNumber numberWithFloat:1.0]
+                                            ,nil];
+        btmAttributeArr = [NSMutableArray arrayWithObjects:[NSNumber numberWithInteger:NSLayoutAttributeBottom]
+                           ,[NSNumber numberWithInteger:NSLayoutRelationEqual]
+                           ,containerView
+                           ,[NSNumber numberWithInteger:NSLayoutAttributeBottom]
+                           ,[NSNumber numberWithFloat:1.0]
+                           ,nil];
+        
+        widthAttributeArr = [NSMutableArray arrayWithObjects:[NSNumber numberWithInteger:NSLayoutAttributeWidth]
+                             ,[NSNumber numberWithInteger:NSLayoutRelationEqual]
+                             ,@""
+                             ,[NSNumber numberWithInteger:NSLayoutAttributeNotAnAttribute]
+                             ,[NSNumber numberWithFloat:1.0]
+                             ,nil];
+        heightAttributeArr = [NSMutableArray arrayWithObjects:[NSNumber numberWithInteger:NSLayoutAttributeHeight]
+                             ,[NSNumber numberWithInteger:NSLayoutRelationEqual]
+                             ,@""
+                             ,[NSNumber numberWithInteger:NSLayoutAttributeNotAnAttribute]
+                             ,[NSNumber numberWithFloat:1.0]
+                             ,nil];
+        
+        
+        if (i==0) {
+            leftAttributeArr[3]=[NSNumber numberWithInteger:NSLayoutAttributeLeft];
+        }
+        if (i==viewCount-1) {
+            rightAttributeArr[3] =[NSNumber numberWithInteger:NSLayoutAttributeRight];
+        }
+        if (isTop) {
+            btmAttributeArr = nil;
+        }
+        else{
+            topAttributeArr = nil;
+        }
+        if (alignment==SBAlignmentLeft && (i==viewCount-1)) {
+            rightAttributeArr = nil;
+        }
+        if (alignment==SBAlignmentRight && (i==0)) {
+            leftAttributeArr = nil;
+        }
+        
+        if(alignment==SBAlignmentCentre)
+        {
+            if (i==0) leftAttributeArr = nil;
+            if(i==viewCount-1) rightAttributeArr = nil;
+            
+            if (i==midx) {
+                rightAttributeArr[2]=containerView;
+                rightAttributeArr[3]=[NSNumber numberWithInteger:NSLayoutAttributeCenterX];
+                
+                ((SBCtBlob*)arrayAtIndex[1]).rightPadding -= viewCount&1 ? ((SBCtBlob*)arrayAtIndex[1]).width>>1 :0;
+                
+            }
+            
+            
+        }
+        
+        
+        
+        [self attachConstraintForView:arrayAtIndex[0]
+                         withSbCTBlob:arrayAtIndex[1]
+                       andLeftViewArr:leftAttributeArr
+                        andTopViewArr:topAttributeArr
+                      andRightViewArr:rightAttributeArr
+                        andBtmViewArr:btmAttributeArr
+                          andWidthArr:widthAttributeArr
+                         andHeightArr:heightAttributeArr
+                         andSuperView:containerView];
+        
+    }
+        
+    
     
     [self updateConstraints];
-    
 }
 
 
+-(NSMutableDictionary *)getContainerInfo:(SBContainerType)containerType // Currently supports only these types SBContainerTypeLeftBarContainer,SBContainerTypeMiddleBarContainer,SBContainerTypeRightBarContainer
+{
+    
+  NSMutableDictionary  * retDict = [NSMutableDictionary dictionary];
 
+    
+    switch (containerType) {
+        
+        case SBContainerTypeLeftBarContainer:
+            [retDict setObject:leftBarContainerView forKey:@"view"];
+            [retDict setObject:[NSNumber numberWithInt:barContainerLeftBarWidth] forKey:@"width"];
+            [retDict setObject:[NSNumber numberWithInt:defaultBarContainerHeight-2*defaultBarContainerVerticalPadding] forKey:@"height"];
+            break;
+        case SBContainerTypeMiddleBarContainer:
+            [retDict setObject:middleBarContainerView forKey:@"view"];
+            [retDict setObject:[NSNumber numberWithFloat:barContainerMiddlerBarWidth] forKey:@"width"];
+            [retDict setObject:[NSNumber numberWithFloat:defaultBarContainerHeight-2*defaultBarContainerVerticalPadding] forKey:@"height"];
+            break;
+        case SBContainerTypeRightBarContainer:
+            [retDict setObject:rightBarContainerView forKey:@"view"];
+            [retDict setObject:[NSNumber numberWithFloat:barContainerRightBarWidth] forKey:@"width"];
+            [retDict setObject:[NSNumber numberWithFloat:rightBarContainerView.frame.size.height] forKey:@"height"];
+            break;
+            
+        default:
+            break;
+    }
+    return retDict;
+}
+
+
+-(void)setContinerViewWith:(UIView *)uv
+          forContainerType:(SBContainerType)containerType
+{
+    
+    switch (containerType) {
+        case SBContainerTypeStatusBar:
+            
+            [statusBarView removeFromSuperview];
+            statusBarView =uv;
+            [self addSubview:statusBarView];
+            [self attachStatusBarConstraints];
+            statusBarView.clipsToBounds = YES;
+            
+            break;
+            
+        case SBContainerTypeTopContainer:
+            
+            [topContainerView removeFromSuperview];
+            topContainerView =uv;
+            [self addSubview:topContainerView];
+            [self attachTopContainerConstraints];
+            topContainerView.clipsToBounds = YES;
+            
+            break;
+        
+        case SBContainerTypeBarImage:
+            
+            [barImageView removeFromSuperview];
+            barImageView =uv;
+            [self addSubview:barImageView];
+            [self attachBarImageConstraints];
+            barImageView.clipsToBounds = YES;
+            
+            break;
+        
+        case SBContainerTypeBarContainer:
+            
+            [barContainerView removeFromSuperview];
+            barContainerView =uv;
+            [self addSubview:barContainerView];
+            [self attachBarContainerConstraints];
+            barContainerView.clipsToBounds = YES;
+            
+            break;
+        case SBContainerTypeLeftBarContainer:
+            
+            [leftBarContainerView removeFromSuperview];
+            leftBarContainerView =uv;
+            [barContainerView addSubview:leftBarContainerView];
+            [self attachLeftBarContainerConstraints];
+            leftBarContainerView.clipsToBounds = YES;
+            
+            break;
+        case SBContainerTypeMiddleBarContainer:
+            
+            [middleBarContainerView removeFromSuperview];
+            middleBarContainerView =uv;
+            [barContainerView addSubview:middleBarContainerView];
+            [self attachMiddleBarContainerConstraints];
+            middleBarContainerView.clipsToBounds = YES;
+            
+            break;
+        case SBContainerTypeRightBarContainer:
+            
+            [rightBarContainerView removeFromSuperview];
+            rightBarContainerView =uv;
+            [barContainerView addSubview:rightBarContainerView];
+            [self attachRightBarContainerConstraints];
+            rightBarContainerView.clipsToBounds = YES;
+            
+            break;
+        case SBContainerTypeBtmContainer:
+            
+            [btmContainerView removeFromSuperview];
+            btmContainerView =uv;
+            [self addSubview:btmContainerView];
+            [self attachBtmContainerConstraints];
+            btmContainerView.clipsToBounds = YES;
+            
+            break;
+        
+            
+        default:
+            break;
+    }
+    
+    [self updateConstraints];
+}
+
+
+-(void)removeAllConstraintsFromSbNav:(UIView *)view// All Constraint of the UIView and its childs are cleared
+{
+    
+    [view removeConstraints:view.constraints];
+    for (UIView * uv in [view subviews]) {
+        [self removeAllConstraintsFromSbNav:uv];
+    }
+    
+}
 
 #pragma -mark Orientation Related
 
@@ -878,7 +1287,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
    
     UIDevice * device = note.object;
     
-    SBLog(@"orientation Changed %f %f %f",[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height,[[UIApplication sharedApplication] statusBarFrame].size.height);
+    //SBLog(@"orientation Changed %f %f %f",[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height,[[UIApplication sharedApplication] statusBarFrame].size.height);
     defaultBarContainerWidth = [UIScreen mainScreen].bounds.size.width;
     [self setUpBarContainerWidthPoint:currentBarContainerLeftBarWidthPoint middleBarWidthPoint:currentBarContainerMiddlerBarWidthPoint];
     switch(device.orientation)
@@ -886,14 +1295,14 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
         
         case UIDeviceOrientationPortrait:
         {
-            SBLog(@"UIDeviceOrientationPortrait");
+          //  SBLog(@"UIDeviceOrientationPortrait");
             statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
             statusBarHeight = statusBarHeight==0? defaultStatusBarHeight:statusBarHeight;
         }
             break;
         case UIDeviceOrientationPortraitUpsideDown:
         {
-            SBLog(@"UIDeviceOrientationPortrait");
+           // SBLog(@"UIDeviceOrientationPortrait");
             statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
             statusBarHeight = statusBarHeight==0? defaultStatusBarHeight:statusBarHeight;
         }
@@ -901,29 +1310,29 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
         case UIDeviceOrientationUnknown:
             
         {
-            SBLog(@"UIDeviceOrientationUnknown");
+           // SBLog(@"UIDeviceOrientationUnknown");
         }
             break;
         case UIDeviceOrientationFaceUp:
             
         {
-            SBLog(@"UIDeviceOrientationFaceUp");
+           // SBLog(@"UIDeviceOrientationFaceUp");
         }
             break;
         case UIDeviceOrientationFaceDown:
             
         {
-            SBLog(@"UIDeviceOrientationFaceDown");
+           // SBLog(@"UIDeviceOrientationFaceDown");
         }
             break;
         case UIDeviceOrientationLandscapeLeft:
         {
-            SBLog(@"UIDeviceOrientationLandscapeLeft");
+            //SBLog(@"UIDeviceOrientationLandscapeLeft");
         }
             break;
         case UIDeviceOrientationLandscapeRight:
         {
-            SBLog(@"UIDeviceOrientationLandscapeRight");
+            //SBLog(@"UIDeviceOrientationLandscapeRight");
         }
             break;
         default:
@@ -933,9 +1342,8 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
             break;
     };
     [self updateConstraints];
-    //[self attachConstraints];
     [self layoutSubviews];
-    //[barContainerView layoutSubviews];
+    
 }
 
 
