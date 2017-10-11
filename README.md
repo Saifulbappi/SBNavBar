@@ -1,8 +1,8 @@
 ## Synopsis
 
 SBNavBar is a UIView which has been designed for a flexible  Navigation Bar with enormous customizing capabilities.
-[Sample1](Sample1.png)
-[Sample2](Sample2.png)
+![Sample1](Sample1.gif)
+![Sample2](Sample2.png)
 
 ## Code Example
 
