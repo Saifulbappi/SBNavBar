@@ -24,7 +24,7 @@
           --------------------------------------------------------
          |                     BAR CONTAINER                      |
          | ------------   -------------------------   ----------- |
-         || LEFT BAR   | |       MIDDLE BAR        | | RIGHT BAR  ||
+         || LEFT BAR   | |       MIDDLE BAR        | | RIGHT BAR ||
          || CONTAINER  | |        CONTAINER        | | CONTAINER ||
          | ------------   -------------------------   ----------- |
          |                                                        |

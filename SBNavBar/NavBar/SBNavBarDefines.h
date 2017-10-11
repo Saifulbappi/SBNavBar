@@ -25,8 +25,8 @@
 
 #define  BAR_CONTAINER_HEIGHT                        44
 #define  DEFAULT_STATUSBAR_HEIGHT                    22
-#define  DEFAULT_TOPCONTAINER_HEIGHT                 0
-#define  DEFAULT_BTMCONTAINER_HEIGHT                 0
+#define  DEFAULT_TOPCONTAINER_HEIGHT                 10
+#define  DEFAULT_BTMCONTAINER_HEIGHT                 10
 #define  DEFUALT_BARCONTAINER_VERTICAL_PADDING       2
 #define  DEFUALT_BARCONTAINER_HORIZONTAL_PADDING     1
 
@@ -41,9 +41,9 @@
 #define STATUSBAR_BACK_COLOR             [UIColor colorWithRed:2/255.0 green:39/255.0 blue:31/255.0 alpha:0.7]
 #define TOP_CONTAINER_BACK_COLOR         [UIColor colorWithRed:56/255.0 green:115/255.0 blue:167/255.0 alpha:1.0]
 #define BAR_CONTAINER_BACK_COLOR         [UIColor colorWithRed:6/255.0 green:76/255.0 blue:63/255.0 alpha:1.0]
-#define LEFTBAR_CONTAINER_BACK_COLOR     [UIColor clearColor]//[UIColor colorWithRed:183/255.0 green:29/255.0 blue:36/255.0 alpha:1.0]
-#define MIDBAR_CONTAINER_BACK_COLOR      [UIColor clearColor]//[UIColor colorWithRed:143/255.0 green:193/255.0 blue:89/255.0 alpha:1.0]
-#define RIGHTBAR_CONTAINER_BACK_COLOR    [UIColor clearColor]//[UIColor colorWithRed:86/255.0 green:198/255.0 blue:210/255.0 alpha:1.0]
+#define LEFTBAR_CONTAINER_BACK_COLOR     [UIColor colorWithRed:183/255.0 green:29/255.0 blue:36/255.0 alpha:1.0]// [UIColor clearColor]//
+#define MIDBAR_CONTAINER_BACK_COLOR      [UIColor colorWithRed:143/255.0 green:193/255.0 blue:89/255.0 alpha:1.0]//[UIColor clearColor]//
+#define RIGHTBAR_CONTAINER_BACK_COLOR    [UIColor colorWithRed:86/255.0 green:198/255.0 blue:210/255.0 alpha:1.0]//[UIColor clearColor]//
 #define BTM_CONTAINER_BACK_COLOR         [UIColor colorWithRed:21/255.0 green:150/255.0 blue:136/255.0 alpha:1.0]
 
 

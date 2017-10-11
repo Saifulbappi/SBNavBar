@@ -64,7 +64,7 @@
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    //[self setupExample3];
+    [self setupExample3];
     
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@
      Setup Example-4
      */
     
-    [self setupExample4];
+    //[self setupExample4];
     
     
     
@@ -267,16 +267,13 @@
 -(void)firstBtnClicked
 {
     SBNavLog(@"firstBtnClicked");
-//    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 -(void)secndBtnClicked
 {
     SBNavLog(@"secndBtnClicked");
-//    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-//    ViewController * vc = [sb instantiateInitialViewController];
-//    [self.navigationController pushViewController:vc animated:YES];
-    
+
 }
 
 

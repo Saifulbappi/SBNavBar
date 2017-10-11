@@ -19,6 +19,12 @@
  */
 -(void)configureStandardBarImage;
 
+
+/**
+ 
+ It Configures a navBar with a backButton and a navigation Title for a ViewController
+ 
+ */
 -(void)standardNavTitle:(NSString *)titleText
      withBackBtnSeletor:(SEL)selector
       forViewController:(UIViewController *)vc;

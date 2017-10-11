@@ -108,6 +108,11 @@ typedef NS_ENUM(NSInteger,SBContainerType)
  
  if isTop==true the top of containerView is the vertical wall else- the bottom of containerView
  
+ For SBAlignmentCentre-- views are aligned with the centerx of the superContainer..
+ 
+ for even number views two halfs(left,right) are parted in left and right from centerX,
+ for odd number of views midView of the array is aligned with the centerX
+ 
  */
 
 

@@ -2,7 +2,35 @@
 
 SBNavBar is a UIView which has been designed for a flexible  Navigation Bar with enormous customizing capabilities.
 ![Sample1](Sample1.gif)
-![Sample2](Sample2.png)
+![Sample2](Sample2.gif)
+
+
+## SBNavBar Architecture
+
+
+``` objective-c
+
+/**
+
+
+            --------------------------------------------------------
+            |                      STATUS BAR                        |
+            --------------------------------------------------------
+            |                    TOP CONTAINER                       |
+            --------------------------------------------------------
+            |                     BAR CONTAINER                      |
+            | ------------   -------------------------   ----------- |
+            || LEFT BAR   | |       MIDDLE BAR        | | RIGHT BAR ||
+            || CONTAINER  | |        CONTAINER        | | CONTAINER ||
+            | ------------   -------------------------   ----------- |
+            |                                                        |
+            --------------------------------------------------------
+            |                     BOTTOM CONTAINER                   |
+            --------------------------------------------------------
+
+*/
+```
+
 
 ## Code Example
 
