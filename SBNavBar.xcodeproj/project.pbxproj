@@ -37,6 +37,7 @@
 		4E3EC0F61F8CD3ED009E55DE /* SBNavBarDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBNavBarDefines.h; sourceTree = "<group>"; };
 		4E3EC0FA1F8CD4AA009E55DE /* UIView+SBNavBarExtender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SBNavBarExtender.h"; sourceTree = "<group>"; };
 		4E3EC0FB1F8CD4AA009E55DE /* UIView+SBNavBarExtender.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SBNavBarExtender.m"; sourceTree = "<group>"; };
+		4E3EC0FE1F8CDD96009E55DE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4E63312B1F84B954009A76C7 /* SBCtBlob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBCtBlob.h; sourceTree = "<group>"; };
 		4E63312C1F84B954009A76C7 /* SBCtBlob.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBCtBlob.m; sourceTree = "<group>"; };
 		4E6BB04F1F8B822A00C1B742 /* add_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_down.png; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		4ECB050F1F7CFF1900B3D577 = {
 			isa = PBXGroup;
 			children = (
+				4E3EC0FE1F8CDD96009E55DE /* README.md */,
 				4ECB051A1F7CFF1900B3D577 /* SBNavBar */,
 				4ECB05331F7CFF1900B3D577 /* SBNavBarUITests */,
 				4ECB05191F7CFF1900B3D577 /* Products */,
