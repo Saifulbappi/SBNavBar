@@ -1,32 +1,34 @@
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+SBNavBar is a UIView which has been designed for a flexible  Navigation Bar with enormous customizing capabilities.
+[Sample1](Sample1.png)
+[Sample2](Sample2.png)
 
 ## Code Example
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+A Sample NavigationBar with a back button and a title.
+
+``` objective-c
+
+SBNavBarView * fakeNav = [[SBNavBarView alloc] init];
+[self.view addSubview:fakeNav];
+[fakeNav attachConstraints];
+[fakeNav standardNavTitle:@"Sweet NavBar" withBackBtnSeletor:@selector(firstBtnClicked) forViewController:self];
+
+```
+More Setup examples are given in ViewDidLoad method of ViewController Class in Sample Project.
+Check those out for more understanding the customizing capabilities.
+
+
 
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+UINavigationBar does not spare us the ability to fully customize naviagation bar as we want. Moreover with major version updates, its layout structure changes sometimes- which becomes a bit pain in the ass for existing projects. SBNavBar is a fake navBar ,which gives enormous customizing ability and stability for navigationBar controls.
 
 ## Installation
-
-Provide code examples and explanations of how to get the project.
-
-## API Reference
-
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
-
-## Tests
-
-Describe and show how to run the tests with code examples.
+ Just Copy the NavBar folder in your project.
 
 
-## Contributors
 
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
 
-## License
 
-A short snippet describing the license (MIT, Apache, etc.)

@@ -13,14 +13,14 @@
 
 
 #ifdef SB_NAV_DEBUG
-#define SBLog(fmt,...) NSLog(@"%@",[NSString stringWithFormat:(fmt), ##__VA_ARGS__]);
+#define SBNavLog(fmt,...) NSLog(@"%@",[NSString stringWithFormat:(fmt), ##__VA_ARGS__]);
 #else
-#define SBLog(...)
+#define SBNavLog(...)
 #endif
 
 #ifdef SB_NAV_DEBUG_DETATILED
-#undef SBLog
-#define SBLog(fmt, ...) NSLog((@"Func: %s, Line: %d, " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#undef SBNavLog
+#define SBNavLog(fmt, ...) NSLog((@"Func: %s, Line: %d, " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #endif
 
 #define  BAR_CONTAINER_HEIGHT                        44
@@ -29,6 +29,9 @@
 #define  DEFAULT_BTMCONTAINER_HEIGHT                 10
 #define  DEFUALT_BARCONTAINER_VERTICAL_PADDING       2
 #define  DEFUALT_BARCONTAINER_HORIZONTAL_PADDING     1
+
+
+#define DEFAULT_PADDING_FOR_STANDARD_CONTAINER_SETUP       4
 
 
 

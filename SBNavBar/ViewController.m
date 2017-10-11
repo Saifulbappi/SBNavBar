@@ -10,11 +10,11 @@
 #import "SampleLeftBarContainerView.h"
 #import "SBNavBarView.h"
 #import "SBCtBlob.h"
-
+#import "SBNavBarView+SBNavBarExtender.h"
 
 @interface ViewController ()
 {
-    SBNavBarView * fakeNav;
+    
 }
 
 @end
@@ -36,28 +36,118 @@
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     
-//    fakeNav = [[SBNavBarView alloc] init];
-//    [self.view addSubview:fakeNav];
-//
-//    //[fakeNav setUpBarContainerWidthPoint:0.5 middleBarWidthPoint:.2];//Optional
-//    [fakeNav attachConstraints];
-//
-//    SampleLeftBarContainerView * uv=[[[NSBundle mainBundle] loadNibNamed:@"SampleSBNavBarViews" owner:self options:nil] objectAtIndex:0];
-//    [fakeNav setContinerViewWith:uv forContainerType:SBContainerTypeLeftBarContainer];
-//
-//    [uv.firstBtn addTarget:self action:@selector(firstBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-//    [uv.scndBtn addTarget:self action:@selector(secndBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    //[self setupExample1];
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
     
     /**
      Setup Example-2
      */
     
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    //[self setupExample2];
+    
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    /**
+     Setup Example-3
+     */
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    //[self setupExample3];
     
-    fakeNav = [[SBNavBarView alloc] init];
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    /**
+     Setup Example-4
+     */
+    
+    [self setupExample4];
+    
+    
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden=YES;
+    
+//
+//    [fakeNav updateConstraints];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    
+    
+}
+
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+#pragma  -mark Testing Actions
+
+-(void)setupExample1
+{
+    SBNavBarView * fakeNav = [[SBNavBarView alloc] init];
+    [self.view addSubview:fakeNav];
+    
+    //[fakeNav setUpBarContainerWidthPoint:0.5 middleBarWidthPoint:.2];//Optional
+    [fakeNav attachConstraints];
+    
+    SampleLeftBarContainerView * uv=[[[NSBundle mainBundle] loadNibNamed:@"SampleSBNavBarViews" owner:self options:nil] objectAtIndex:0];
+    [fakeNav setContinerViewWith:uv forContainerType:SBContainerTypeLeftBarContainer];
+    
+    [uv.firstBtn addTarget:self action:@selector(firstBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [uv.scndBtn addTarget:self action:@selector(secndBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+
+}
+-(void)setupExample2
+{
+    SBNavBarView * fakeNav = [[SBNavBarView alloc] init];
+    [self.view addSubview:fakeNav];
+    
+    [fakeNav attachConstraints];
+    
+    UIButton * button1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+    button1.backgroundColor = [UIColor blueColor];
+    [button1 setTitle:@"b1" forState:UIControlStateNormal];
+    [button1 addTarget:self action:@selector(firstBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton * button2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+    button2.backgroundColor = [UIColor redColor];
+    [button2 setTitle:@"b2" forState:UIControlStateNormal];
+    [button2 addTarget:self action:@selector(secndBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    [fakeNav setupBarContainerWithStandardPadding:@[button1,button2] forContainerType:SBContainerTypeLeftBarContainer alignment:SBAlignmentLeft isTopVerticalWall:YES];
+}
+
+-(void)setupExample3
+{
+    SBNavBarView * fakeNav = [[SBNavBarView alloc] init];
     [self.view addSubview:fakeNav];
     
     [fakeNav setUpBarContainerWidthPoint:0.33 middleBarWidthPoint:.33];//Optional
@@ -98,25 +188,32 @@
     [button5 addTarget:self action:@selector(firstBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton * button6 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0,sampleWidth ,sampleHeight )];
-    button6.backgroundColor = [UIColor magentaColor];
+    button6.backgroundColor = [UIColor greenColor];
     [button6 setTitle:@"b6" forState:UIControlStateNormal];
     [button6 addTarget:self action:@selector(secndBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    /**
+     IMPORTANT-- when isTopverticalWall is true-then btmPadding is not used Only topPadding is used.... and vice versa for isTopverticalWall=false
+     
+     */
     
     
     [fakeNav setupBarContainerWithViews:@[
                                           @[
                                               button1,
                                               [[SBCtBlob alloc] initwithLeft:0 topPadding:5 rightPadding:0 btmPadding:0 width:sampleWidth height:sampleHeight]
-                                          ],
+                                              ],
                                           @[
                                               button2,
                                               [[SBCtBlob alloc] initwithLeft:0 topPadding:5 rightPadding:0 btmPadding:0 width:sampleWidth height:sampleHeight]
                                               ]
-
+                                          
                                           ]
                        forContainerType:SBContainerTypeLeftBarContainer
-                         alignment:SBAlignmentLeft
-                           isTopverticalWall:true];
+                              alignment:SBAlignmentLeft
+                      isTopverticalWall:true];
     
     [fakeNav setupBarContainerWithViews:@[
                                           @[
@@ -151,60 +248,31 @@
                       isTopverticalWall:false];
     
 
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    
-    /**
-     <#Description#>
-     */
-    
-    
-    
 }
 
--(void)viewWillAppear:(BOOL)animated
+
+-(void)setupExample4
 {
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden=YES;
-    
-//
-//    [fakeNav updateConstraints];
-    
-}
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    
-    
-    NSLog(@"rect of vc %@",NSStringFromCGRect(self.view.frame));
+    SBNavBarView * fakeNav = [[SBNavBarView alloc] init];
+    [self.view addSubview:fakeNav];
+    [fakeNav attachConstraints];
+    [fakeNav standardNavTitle:@"Sweet NavBar" withBackBtnSeletor:@selector(firstBtnClicked) forViewController:self];
     
     
 }
 
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
-#pragma  -mark Testing Actions
 
 -(void)firstBtnClicked
 {
-    SBLog(@"firstBtnClicked");
+    SBNavLog(@"firstBtnClicked");
 //    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)secndBtnClicked
 {
-    SBLog(@"secndBtnClicked");
+    SBNavLog(@"secndBtnClicked");
 //    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 //    ViewController * vc = [sb instantiateInitialViewController];
 //    [self.navigationController pushViewController:vc animated:YES];

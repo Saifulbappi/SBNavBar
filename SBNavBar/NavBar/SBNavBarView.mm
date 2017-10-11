@@ -7,6 +7,7 @@
 //
 
 #import "SBNavBarView.h"
+#import "SBNavBarView+SBNavBarExtender.h"
 #import "SBCtBlob.h"
 
 
@@ -276,6 +277,16 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     middleBarContainerView = [[UIView alloc] init];
     btmContainerView = [[UIView alloc] init];
     
+    statusBarView.clipsToBounds = YES;
+    topContainerView.clipsToBounds = YES;
+    barContainerView.clipsToBounds = YES;
+    barImageView.clipsToBounds = YES;
+    leftBarContainerView.clipsToBounds = YES;
+    rightBarContainerView.clipsToBounds = YES;
+    middleBarContainerView.clipsToBounds = YES;
+    btmContainerView.clipsToBounds = YES;
+    
+   
     statusBarView.backgroundColor = STATUSBAR_BACK_COLOR;
     topContainerView.backgroundColor = TOP_CONTAINER_BACK_COLOR;
     barContainerView.backgroundColor = BAR_CONTAINER_BACK_COLOR;
@@ -1041,7 +1052,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
         [containerView addSubview:[views objectAtIndex:i][0]];
     }
     
-    int midx = (viewCount & 1)? viewCount>>1:(viewCount>>1)-1 ; //finding mid View for CenterAlignment
+    int midView = (viewCount & 1)? viewCount>>1:(viewCount>>1)-1 ; //finding mid View for CenterAlignment
         
     for (int i=0; i<viewCount; i++)
     {
@@ -1116,9 +1127,9 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
         if(alignment==SBAlignmentCentre)
         {
             if (i==0) leftAttributeArr = nil;
-            if(i==viewCount-1) rightAttributeArr = nil;
+            if(i==viewCount-1 && i!=midView) rightAttributeArr = nil;
             
-            if (i==midx) {
+            if (i==midView) {
                 rightAttributeArr[2]=containerView;
                 rightAttributeArr[3]=[NSNumber numberWithInteger:NSLayoutAttributeCenterX];
                 
@@ -1128,9 +1139,6 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
             
             
         }
-        
-        
-        
         [self attachConstraintForView:arrayAtIndex[0]
                          withSbCTBlob:arrayAtIndex[1]
                        andLeftViewArr:leftAttributeArr
@@ -1146,6 +1154,33 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     
     
     [self updateConstraints];
+}
+
+
+-(void)setupBarContainerWithStandardPadding:(NSArray *)views
+                           forContainerType:(SBContainerType)containerType
+                                  alignment:(SBAlignment)alignment
+                          isTopVerticalWall:(bool)isTop
+{
+    int containerHeight = [[[self getContainerInfo:containerType] objectForKey:@"height"] intValue];
+    
+    NSMutableArray * finalArrayToPass = [NSMutableArray array];
+    
+    for (int i=0; i<views.count; i++)
+    {
+        SBCtBlob * ctBlob = [[SBCtBlob alloc] initwithLeft:DEFAULT_PADDING_FOR_STANDARD_CONTAINER_SETUP topPadding:0 rightPadding:DEFAULT_PADDING_FOR_STANDARD_CONTAINER_SETUP btmPadding:0
+                                                     width:((UIView*)views[i]).frame.size.width
+                                                    height:((UIView*)views[i]).frame.size.height];
+        
+        if (isTop) ctBlob.topPadding = (containerHeight-ctBlob.height)>>1;  //containerHeight Shoudl be greater than ctBlob.height
+        else ctBlob.btmPadding = (containerHeight-ctBlob.height)>>1;
+        
+        [finalArrayToPass addObject:[NSArray arrayWithObjects:views[i],ctBlob, nil]];
+        
+        
+    }
+    [self setupBarContainerWithViews:finalArrayToPass forContainerType:containerType alignment:alignment isTopverticalWall:isTop];
+    
 }
 
 
@@ -1287,7 +1322,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
    
     UIDevice * device = note.object;
     
-    //SBLog(@"orientation Changed %f %f %f",[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height,[[UIApplication sharedApplication] statusBarFrame].size.height);
+    //SBNavLog(@"orientation Changed %f %f %f",[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height,[[UIApplication sharedApplication] statusBarFrame].size.height);
     defaultBarContainerWidth = [UIScreen mainScreen].bounds.size.width;
     [self setUpBarContainerWidthPoint:currentBarContainerLeftBarWidthPoint middleBarWidthPoint:currentBarContainerMiddlerBarWidthPoint];
     switch(device.orientation)
@@ -1295,14 +1330,14 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
         
         case UIDeviceOrientationPortrait:
         {
-          //  SBLog(@"UIDeviceOrientationPortrait");
+          //  SBNavLog(@"UIDeviceOrientationPortrait");
             statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
             statusBarHeight = statusBarHeight==0? defaultStatusBarHeight:statusBarHeight;
         }
             break;
         case UIDeviceOrientationPortraitUpsideDown:
         {
-           // SBLog(@"UIDeviceOrientationPortrait");
+           // SBNavLog(@"UIDeviceOrientationPortrait");
             statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
             statusBarHeight = statusBarHeight==0? defaultStatusBarHeight:statusBarHeight;
         }
@@ -1310,29 +1345,29 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
         case UIDeviceOrientationUnknown:
             
         {
-           // SBLog(@"UIDeviceOrientationUnknown");
+           // SBNavLog(@"UIDeviceOrientationUnknown");
         }
             break;
         case UIDeviceOrientationFaceUp:
             
         {
-           // SBLog(@"UIDeviceOrientationFaceUp");
+           // SBNavLog(@"UIDeviceOrientationFaceUp");
         }
             break;
         case UIDeviceOrientationFaceDown:
             
         {
-           // SBLog(@"UIDeviceOrientationFaceDown");
+           // SBNavLog(@"UIDeviceOrientationFaceDown");
         }
             break;
         case UIDeviceOrientationLandscapeLeft:
         {
-            //SBLog(@"UIDeviceOrientationLandscapeLeft");
+            //SBNavLog(@"UIDeviceOrientationLandscapeLeft");
         }
             break;
         case UIDeviceOrientationLandscapeRight:
         {
-            //SBLog(@"UIDeviceOrientationLandscapeRight");
+            //SBNavLog(@"UIDeviceOrientationLandscapeRight");
         }
             break;
         default:

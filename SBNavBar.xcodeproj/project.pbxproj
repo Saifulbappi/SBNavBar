@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E3EC0FC1F8CD4AA009E55DE /* UIView+SBNavBarExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3EC0FB1F8CD4AA009E55DE /* UIView+SBNavBarExtender.m */; };
 		4E63312D1F84B954009A76C7 /* SBCtBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E63312C1F84B954009A76C7 /* SBCtBlob.m */; };
 		4ECB051D1F7CFF1900B3D577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB051C1F7CFF1900B3D577 /* AppDelegate.m */; };
 		4ECB05201F7CFF1900B3D577 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB051F1F7CFF1900B3D577 /* ViewController.m */; };
@@ -19,8 +18,8 @@
 		4ECB05421F7D028500B3D577 /* SBNavBarView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB05411F7D028500B3D577 /* SBNavBarView.mm */; };
 		4ECB75D11F8A0A33007334D4 /* SampleLeftBarContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB75D01F8A0A33007334D4 /* SampleLeftBarContainerView.m */; };
 		4ECB75D31F8A0A67007334D4 /* SampleSBNavBarViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ECB75D21F8A0A67007334D4 /* SampleSBNavBarViews.xib */; };
-		4ECB75DC1F8A2F99007334D4 /* video_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECB75DA1F8A2F99007334D4 /* video_up.png */; };
 		4ECB75DD1F8A2F99007334D4 /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECB75DB1F8A2F99007334D4 /* back_button.png */; };
+		4EFB30491F8DD7D50088E319 /* SBNavBarView+SBNavBarExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFB30481F8DD7D50088E319 /* SBNavBarView+SBNavBarExtender.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,13 +33,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E3D0FD01F8E00A600D68F29 /* Sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sample1.png; sourceTree = "<group>"; };
+		4E3D0FD11F8E00A600D68F29 /* Sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sample2.png; sourceTree = "<group>"; };
 		4E3EC0F61F8CD3ED009E55DE /* SBNavBarDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBNavBarDefines.h; sourceTree = "<group>"; };
-		4E3EC0FA1F8CD4AA009E55DE /* UIView+SBNavBarExtender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SBNavBarExtender.h"; sourceTree = "<group>"; };
-		4E3EC0FB1F8CD4AA009E55DE /* UIView+SBNavBarExtender.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SBNavBarExtender.m"; sourceTree = "<group>"; };
 		4E3EC0FE1F8CDD96009E55DE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4E63312B1F84B954009A76C7 /* SBCtBlob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBCtBlob.h; sourceTree = "<group>"; };
 		4E63312C1F84B954009A76C7 /* SBCtBlob.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBCtBlob.m; sourceTree = "<group>"; };
-		4E6BB04F1F8B822A00C1B742 /* add_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_down.png; sourceTree = "<group>"; };
 		4ECB05181F7CFF1900B3D577 /* SBNavBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBNavBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECB051B1F7CFF1900B3D577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4ECB051C1F7CFF1900B3D577 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -59,8 +57,11 @@
 		4ECB75CF1F8A0A33007334D4 /* SampleLeftBarContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleLeftBarContainerView.h; sourceTree = "<group>"; };
 		4ECB75D01F8A0A33007334D4 /* SampleLeftBarContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleLeftBarContainerView.m; sourceTree = "<group>"; };
 		4ECB75D21F8A0A67007334D4 /* SampleSBNavBarViews.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SampleSBNavBarViews.xib; sourceTree = "<group>"; };
-		4ECB75DA1F8A2F99007334D4 /* video_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_up.png; sourceTree = "<group>"; };
 		4ECB75DB1F8A2F99007334D4 /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
+		4EFB30451F8DC7E30088E319 /* Roboto-Condensed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Condensed.ttf"; sourceTree = "<group>"; };
+		4EFB30461F8DC7E30088E319 /* Boquer¢n.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Boquer¢n.ttf"; sourceTree = "<group>"; };
+		4EFB30471F8DD7D50088E319 /* SBNavBarView+SBNavBarExtender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SBNavBarView+SBNavBarExtender.h"; sourceTree = "<group>"; };
+		4EFB30481F8DD7D50088E319 /* SBNavBarView+SBNavBarExtender.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SBNavBarView+SBNavBarExtender.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +85,8 @@
 		4ECB050F1F7CFF1900B3D577 = {
 			isa = PBXGroup;
 			children = (
+				4E3D0FD01F8E00A600D68F29 /* Sample1.png */,
+				4E3D0FD11F8E00A600D68F29 /* Sample2.png */,
 				4E3EC0FE1F8CDD96009E55DE /* README.md */,
 				4ECB051A1F7CFF1900B3D577 /* SBNavBar */,
 				4ECB05331F7CFF1900B3D577 /* SBNavBarUITests */,
@@ -136,8 +139,8 @@
 				4E63312B1F84B954009A76C7 /* SBCtBlob.h */,
 				4E63312C1F84B954009A76C7 /* SBCtBlob.m */,
 				4E3EC0F61F8CD3ED009E55DE /* SBNavBarDefines.h */,
-				4E3EC0FA1F8CD4AA009E55DE /* UIView+SBNavBarExtender.h */,
-				4E3EC0FB1F8CD4AA009E55DE /* UIView+SBNavBarExtender.m */,
+				4EFB30471F8DD7D50088E319 /* SBNavBarView+SBNavBarExtender.h */,
+				4EFB30481F8DD7D50088E319 /* SBNavBarView+SBNavBarExtender.m */,
 			);
 			path = NavBar;
 			sourceTree = "<group>";
@@ -155,9 +158,9 @@
 		4ECB75D51F8A2946007334D4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4EFB30461F8DC7E30088E319 /* Boquer¢n.ttf */,
+				4EFB30451F8DC7E30088E319 /* Roboto-Condensed.ttf */,
 				4ECB75DB1F8A2F99007334D4 /* back_button.png */,
-				4ECB75DA1F8A2F99007334D4 /* video_up.png */,
-				4E6BB04F1F8B822A00C1B742 /* add_down.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -248,7 +251,6 @@
 				4ECB05251F7CFF1900B3D577 /* Assets.xcassets in Resources */,
 				4ECB75DD1F8A2F99007334D4 /* back_button.png in Resources */,
 				4ECB05231F7CFF1900B3D577 /* Main.storyboard in Resources */,
-				4ECB75DC1F8A2F99007334D4 /* video_up.png in Resources */,
 				4ECB75D31F8A0A67007334D4 /* SampleSBNavBarViews.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,7 +274,7 @@
 				4ECB052B1F7CFF1900B3D577 /* main.m in Sources */,
 				4ECB051D1F7CFF1900B3D577 /* AppDelegate.m in Sources */,
 				4E63312D1F84B954009A76C7 /* SBCtBlob.m in Sources */,
-				4E3EC0FC1F8CD4AA009E55DE /* UIView+SBNavBarExtender.m in Sources */,
+				4EFB30491F8DD7D50088E319 /* SBNavBarView+SBNavBarExtender.m in Sources */,
 				4ECB05421F7D028500B3D577 /* SBNavBarView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

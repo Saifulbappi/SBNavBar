@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "SBNavBarDefines.h"
-#import "UIView+SBNavBarExtender.h"
 
 
 
@@ -116,6 +115,30 @@ typedef NS_ENUM(NSInteger,SBContainerType)
                  forContainerType:(SBContainerType)containerType
                         alignment:(SBAlignment)alignment
                 isTopverticalWall:(bool)isTop;
+
+
+
+/**
+  This method works similarly like setupBarContainerWithViews method
+  only standard paddings are set programatically
+ 
+  Here Views Array should only contains views not SBCtBlobs
+ 
+ A sample views array should look like-
+ 
+ @{
+     @{UIView1}
+     @{UIView2}
+     @{UIView3}
+     .....
+ }
+ 
+ 
+ */
+-(void)setupBarContainerWithStandardPadding:(NSArray *)views
+                           forContainerType:(SBContainerType)containerType
+                                  alignment:(SBAlignment)alignment
+                          isTopVerticalWall:(bool)isTop;
 
 
 
