@@ -41,17 +41,45 @@
    
     
     [self setupBarContainerWithStandardPadding:[NSArray arrayWithObjects:titleLabel, nil] forContainerType:SBContainerTypeMiddleBarContainer alignment:SBAlignmentCentre isTopVerticalWall:YES];
-    
-    UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
 
-    [backBtn setImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-    [backBtn addTarget:vc action:selector forControlEvents:UIControlEventTouchUpInside];
+    if(selector)
+    {
+        UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+        [backBtn setImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+        [backBtn addTarget:vc action:selector forControlEvents:UIControlEventTouchUpInside];
+        
+        [self setupBarContainerWithStandardPadding:[NSArray arrayWithObjects:backBtn, nil] forContainerType:SBContainerTypeLeftBarContainer alignment:SBAlignmentLeft isTopVerticalWall:YES];
+    }
+    
+    
+    
+}
 
-    [self setupBarContainerWithStandardPadding:[NSArray arrayWithObjects:backBtn, nil] forContainerType:SBContainerTypeLeftBarContainer alignment:SBAlignmentLeft isTopVerticalWall:YES];
+#pragma -mark Dialer Needed
+
+-(void)regViewAddForVC:(UIViewController * )vc
+{
     
     
+    //    [vc.view addSubview:self];
+    //    [self attachConstraints];
     
+    self.nv = [[[NSBundle mainBundle] loadNibNamed:@"SampleSBNavBarViews" owner:vc options:nil] objectAtIndex:1];
+    [self setContinerViewWith:self.nv forContainerType:SBContainerTypeTopContainer];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(regViewUpdate:) name:@"REG_VIEW_UPDATE" object:nil];
+}
+
+-(void)regViewUpdate:(NSNotification *)noti
+{
+    NSLog(@"Came in regViewUpdate %@",noti.userInfo);
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        
+        self.nv.statusLabel.text = noti.userInfo[@"statusString"];
+        self.nv.balanceLabel.text = noti.userInfo[@"balanceString"];
+        
+    }];
     
     
 }

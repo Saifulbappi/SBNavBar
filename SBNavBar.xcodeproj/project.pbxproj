@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E63312D1F84B954009A76C7 /* SBCtBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E63312C1F84B954009A76C7 /* SBCtBlob.m */; };
+		4E9E47BB1F9321CE0085C0F7 /* NewRegView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9E47B91F9321CE0085C0F7 /* NewRegView.m */; };
 		4ECB051D1F7CFF1900B3D577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB051C1F7CFF1900B3D577 /* AppDelegate.m */; };
 		4ECB05201F7CFF1900B3D577 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB051F1F7CFF1900B3D577 /* ViewController.m */; };
 		4ECB05231F7CFF1900B3D577 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ECB05211F7CFF1900B3D577 /* Main.storyboard */; };
@@ -41,6 +42,8 @@
 		4E3EC0FE1F8CDD96009E55DE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4E63312B1F84B954009A76C7 /* SBCtBlob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBCtBlob.h; sourceTree = "<group>"; };
 		4E63312C1F84B954009A76C7 /* SBCtBlob.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBCtBlob.m; sourceTree = "<group>"; };
+		4E9E47B91F9321CE0085C0F7 /* NewRegView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRegView.m; sourceTree = "<group>"; };
+		4E9E47BA1F9321CE0085C0F7 /* NewRegView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRegView.h; sourceTree = "<group>"; };
 		4ECB05181F7CFF1900B3D577 /* SBNavBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBNavBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECB051B1F7CFF1900B3D577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4ECB051C1F7CFF1900B3D577 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 		4ECB75CB1F8A09CA007334D4 /* SampleBarViews */ = {
 			isa = PBXGroup;
 			children = (
+				4E9E47BA1F9321CE0085C0F7 /* NewRegView.h */,
+				4E9E47B91F9321CE0085C0F7 /* NewRegView.m */,
 				4ECB75CF1F8A0A33007334D4 /* SampleLeftBarContainerView.h */,
 				4ECB75D01F8A0A33007334D4 /* SampleLeftBarContainerView.m */,
 				4ECB75D21F8A0A67007334D4 /* SampleSBNavBarViews.xib */,
@@ -275,6 +280,7 @@
 			files = (
 				4ECB05201F7CFF1900B3D577 /* ViewController.m in Sources */,
 				4ECB75D11F8A0A33007334D4 /* SampleLeftBarContainerView.m in Sources */,
+				4E9E47BB1F9321CE0085C0F7 /* NewRegView.m in Sources */,
 				4ECB052B1F7CFF1900B3D577 /* main.m in Sources */,
 				4ECB051D1F7CFF1900B3D577 /* AppDelegate.m in Sources */,
 				4E63312D1F84B954009A76C7 /* SBCtBlob.m in Sources */,

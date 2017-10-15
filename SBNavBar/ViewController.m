@@ -64,7 +64,7 @@
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    [self setupExample3];
+    //[self setupExample3];
     
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,6 +75,10 @@
      */
     
     //[self setupExample4];
+    
+    
+    
+    [self setupExampleRegView];
     
     
     
@@ -262,6 +266,17 @@
     
 }
 
+-(void)setupExampleRegView//RegView
+{
+    SBNavBarView * fakeNav = [[SBNavBarView alloc] init];
+    [self.view addSubview:fakeNav];
+    [fakeNav attachConstraints];
+    [fakeNav regViewAddForVC:self];
+    
+    [fakeNav standardNavTitle:@"FakeNav" withBackBtnSeletor:nil forViewController:self];
+    
+    
+}
 
 
 -(void)firstBtnClicked

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SBNavBarDefines.h"
-
+#import "NewRegView.h"
 
 
 
@@ -40,6 +40,19 @@ typedef NS_ENUM(NSInteger,SBContainerType)
 
 
 
+
+
+@property(strong,nonatomic) NewRegView * nv;
+
+
+
+
+/**
+ ViewController have TabBar
+ */
+
+
+-(id)initForTab;
 
 
 /**

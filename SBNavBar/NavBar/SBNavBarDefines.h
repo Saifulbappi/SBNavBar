@@ -27,12 +27,21 @@
 #define  DEFAULT_STATUSBAR_HEIGHT                    22
 #define  DEFAULT_TOPCONTAINER_HEIGHT                 10
 #define  DEFAULT_BTMCONTAINER_HEIGHT                 10
+
 #define  DEFUALT_BARCONTAINER_VERTICAL_PADDING       2
 #define  DEFUALT_BARCONTAINER_HORIZONTAL_PADDING     1
 
+#define DEFAULT_SYSTEM_TAB_BAR_HEIGHT                49
 
 #define DEFAULT_PADDING_FOR_STANDARD_CONTAINER_SETUP       4
 
+
+
+#pragma -mark Notification
+
+#define REG_VIEW_UPDATE         @"REG_VIEW_UPDATE"
+
+#pragma -mark
 
 
 

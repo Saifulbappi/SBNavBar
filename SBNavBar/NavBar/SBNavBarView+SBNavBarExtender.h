@@ -29,5 +29,8 @@
      withBackBtnSeletor:(SEL)selector
       forViewController:(UIViewController *)vc;
 
+-(void)regViewAddForVC:(UIViewController * )vc;
+
+
 
 @end

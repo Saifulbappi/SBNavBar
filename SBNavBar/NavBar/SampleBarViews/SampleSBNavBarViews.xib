@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -43,6 +44,41 @@
                 <outlet property="scndBtn" destination="Wp0-bF-7Uf" id="vwe-q8-gQw"/>
             </connections>
             <point key="canvasLocation" x="-175" y="-17"/>
+        </view>
+        <view contentMode="scaleToFill" id="1BB-fa-q6I" customClass="NewRegView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="14"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZX7-Ul-Uq7">
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhM-pW-8ve">
+                    <rect key="frame" x="162" y="0.0" width="158" height="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="hhM-pW-8ve" firstAttribute="leading" secondItem="ZX7-Ul-Uq7" secondAttribute="trailing" constant="2" id="27c-Fq-pgK"/>
+                <constraint firstItem="hhM-pW-8ve" firstAttribute="top" secondItem="1BB-fa-q6I" secondAttribute="top" id="7AL-Ep-d6F"/>
+                <constraint firstAttribute="trailing" secondItem="hhM-pW-8ve" secondAttribute="trailing" id="DVR-Kb-KHH"/>
+                <constraint firstAttribute="bottom" secondItem="hhM-pW-8ve" secondAttribute="bottom" id="Lrz-kf-q7U"/>
+                <constraint firstItem="ZX7-Ul-Uq7" firstAttribute="top" secondItem="1BB-fa-q6I" secondAttribute="top" id="U6z-Nj-2dA"/>
+                <constraint firstAttribute="centerX" secondItem="ZX7-Ul-Uq7" secondAttribute="trailing" id="aVT-Xc-85L"/>
+                <constraint firstItem="ZX7-Ul-Uq7" firstAttribute="leading" secondItem="1BB-fa-q6I" secondAttribute="leading" id="rGY-vz-hye"/>
+                <constraint firstAttribute="bottom" secondItem="ZX7-Ul-Uq7" secondAttribute="bottom" id="xMc-0U-DgW"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="balanceLabel" destination="hhM-pW-8ve" id="fv6-0I-hyN"/>
+                <outlet property="statusLabel" destination="ZX7-Ul-Uq7" id="BbM-bh-xIa"/>
+            </connections>
+            <point key="canvasLocation" x="145" y="-9"/>
         </view>
     </objects>
     <resources>

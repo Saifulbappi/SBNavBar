@@ -34,6 +34,7 @@
  
  */
 
+static int defaultTabBarHeight ; //If Tab Bar in Btm is Active
 
 static int defaultBarContainerHeight = BAR_CONTAINER_HEIGHT;
 static int defaultStatusBarHeight = DEFAULT_STATUSBAR_HEIGHT;
@@ -244,6 +245,8 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;//For iPhone X it is around 40
     statusBarHeight = statusBarHeight==0? defaultStatusBarHeight:statusBarHeight;
     
+    defaultTabBarHeight=0;
+    
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
         // code for landscape orientation
@@ -262,6 +265,16 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     
     return self;
 }
+
+-(id)initForTab
+{
+    if ([self init]) {
+        
+    }
+    defaultTabBarHeight=DEFAULT_SYSTEM_TAB_BAR_HEIGHT;
+    return self;
+}
+
 
 -(void)attachSubViews
 {
@@ -328,7 +341,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
      SBNavBar Constraints
      */
     
-    mainViewCtBlob = [[SBCtBlob alloc] initwithLeft:0 topPadding:0 rightPadding:0 btmPadding:-([UIScreen mainScreen].bounds.size.height-((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight)) ];
+    mainViewCtBlob = [[SBCtBlob alloc] initwithLeft:0 topPadding:0 rightPadding:0 btmPadding:-([UIScreen mainScreen].bounds.size.height-defaultTabBarHeight-((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight)) ];
     
     
     self.translatesAutoresizingMaskIntoConstraints=NO;
@@ -927,7 +940,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 
 -(void)updateNeededCtBlobs
 {
-    mainViewCtBlob.btmPadding =-([UIScreen mainScreen].bounds.size.height-((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight));
+     mainViewCtBlob.btmPadding =-([UIScreen mainScreen].bounds.size.height-defaultTabBarHeight -((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight));
     
     
     
@@ -1236,6 +1249,9 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
             topContainerView =uv;
             [self addSubview:topContainerView];
             [self attachTopContainerConstraints];
+            [self attachBarContainerConstraints];
+            [self attachBarImageConstraints];
+            [self attachBtmContainerConstraints];
             topContainerView.clipsToBounds = YES;
             
             break;
@@ -1256,6 +1272,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
             barContainerView =uv;
             [self addSubview:barContainerView];
             [self attachBarContainerConstraints];
+            [self attachBtmContainerConstraints];
             barContainerView.clipsToBounds = YES;
             
             break;
@@ -1378,6 +1395,20 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     };
     [self updateConstraints];
     [self layoutSubviews];
+    
+}
+#pragma -mark
+
+-(void)dealloc
+{
+    @try
+    {
+        [self removeObserver:self forKeyPath:REG_VIEW_UPDATE];
+    }
+    @catch(id anException)
+    {
+        
+    }
     
 }
 
