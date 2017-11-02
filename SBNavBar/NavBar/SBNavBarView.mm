@@ -1218,7 +1218,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
         case SBContainerTypeRightBarContainer:
             [retDict setObject:rightBarContainerView forKey:@"view"];
             [retDict setObject:[NSNumber numberWithFloat:barContainerRightBarWidth] forKey:@"width"];
-            [retDict setObject:[NSNumber numberWithFloat:rightBarContainerView.frame.size.height] forKey:@"height"];
+            [retDict setObject:[NSNumber numberWithFloat:defaultBarContainerHeight-2*defaultBarContainerVerticalPadding] forKey:@"height"];
             break;
             
         default:
