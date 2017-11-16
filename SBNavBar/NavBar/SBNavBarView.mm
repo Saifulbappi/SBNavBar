@@ -271,7 +271,13 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     if ([self init]) {
         
     }
-    defaultTabBarHeight=DEFAULT_SYSTEM_TAB_BAR_HEIGHT;
+    if ([[UIScreen mainScreen] nativeBounds].size.height==2436)//since there is no system api to detect iPhone X now.. using this as a work around for now
+    {
+        defaultTabBarHeight=83;
+    }
+    else{
+        defaultTabBarHeight=DEFAULT_SYSTEM_TAB_BAR_HEIGHT;
+    }
     return self;
 }
 
