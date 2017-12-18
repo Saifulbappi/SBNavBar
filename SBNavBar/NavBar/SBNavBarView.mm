@@ -34,7 +34,7 @@
  
  */
 
-static int defaultTabBarHeight ; //If Tab Bar in Btm is Active
+
 
 static int defaultBarContainerHeight = BAR_CONTAINER_HEIGHT;
 static int defaultStatusBarHeight = DEFAULT_STATUSBAR_HEIGHT;
@@ -48,7 +48,12 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 
 
 
-
+@interface SBNavBarView()
+{
+    
+}
+@property(nonatomic,assign) int defaultTabBarHeight ; //If Tab Bar in Btm is Active
+@end
 
 
 @implementation SBNavBarView
@@ -215,69 +220,73 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
     
     
     /**
-             view inits
+     view inits
      */
     
-    
-    
-    [self attachSubViews];
-    [self configureStandardBarImage];
-    
-    /**
-             Variable inits
-     */
-    
-    
-    
-    sbNavBarViewsDict = [NSMutableDictionary dictionary];
-//    sbNavBarViewsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,@"self",
-//                         self.superview,@"super",
-//                         statusBarView,@"statusBarView",
-//                         topContainerView,@"topContainerView",
-//                         barContainerView,@"barContainerView",
-//                         barImageView,@"barImageView",
-//                         leftBarContainerView,@"leftBarContainerView",
-//                         rightBarContainerView,@"rightBarContainerView",
-//                         middleBarContainerView,@"middleBarContainerView",
-//                         btmContainerView,@"btmContainerView",
-//                         nil ];
-    
-    statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;//For iPhone X it is around 40
-    statusBarHeight = statusBarHeight==0? defaultStatusBarHeight:statusBarHeight;
-    
-    defaultTabBarHeight=0;
-    
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    if(self)
     {
-        // code for landscape orientation
-        statusBarHeight = defaultStatusBarHeight;
+        [self attachSubViews];
+        [self configureStandardBarImage];
+        
+        /**
+         Variable inits
+         */
+        
+        
+        
+        sbNavBarViewsDict = [NSMutableDictionary dictionary];
+        //    sbNavBarViewsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,@"self",
+        //                         self.superview,@"super",
+        //                         statusBarView,@"statusBarView",
+        //                         topContainerView,@"topContainerView",
+        //                         barContainerView,@"barContainerView",
+        //                         barImageView,@"barImageView",
+        //                         leftBarContainerView,@"leftBarContainerView",
+        //                         rightBarContainerView,@"rightBarContainerView",
+        //                         middleBarContainerView,@"middleBarContainerView",
+        //                         btmContainerView,@"btmContainerView",
+        //                         nil ];
+        
+        statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;//For iPhone X it is around 40
+        statusBarHeight = statusBarHeight==0? defaultStatusBarHeight:statusBarHeight;
+        
+        _defaultTabBarHeight=0;
+        
+        if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+        {
+            // code for landscape orientation
+            statusBarHeight = defaultStatusBarHeight;
+        }
+        
+        /**
+         Observer and other inits
+         */
+        
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self selector:@selector(orientationChanged:)
+         name:UIDeviceOrientationDidChangeNotification
+         object:nil];
     }
     
-    /**
-         Observer and other inits
-     */
     
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(orientationChanged:)
-     name:UIDeviceOrientationDidChangeNotification
-     object:nil];
     
     return self;
 }
 
+
 -(id)initForTab
 {
     if ([self init]) {
-        
+        if ([[UIScreen mainScreen] nativeBounds].size.height==2436)//since there is no system api to detect iPhone X now.. using this as a work around for now
+        {
+            _defaultTabBarHeight=83;
+        }
+        else{
+            _defaultTabBarHeight=DEFAULT_SYSTEM_TAB_BAR_HEIGHT;
+        }
     }
-    if ([[UIScreen mainScreen] nativeBounds].size.height==2436)//since there is no system api to detect iPhone X now.. using this as a work around for now
-    {
-        defaultTabBarHeight=83;
-    }
-    else{
-        defaultTabBarHeight=DEFAULT_SYSTEM_TAB_BAR_HEIGHT;
-    }
+    
     return self;
 }
 
@@ -347,7 +356,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
      SBNavBar Constraints
      */
     
-    mainViewCtBlob = [[SBCtBlob alloc] initwithLeft:0 topPadding:0 rightPadding:0 btmPadding:-([UIScreen mainScreen].bounds.size.height-defaultTabBarHeight-((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight)) ];
+    mainViewCtBlob = [[SBCtBlob alloc] initwithLeft:0 topPadding:0 rightPadding:0 btmPadding:-([UIScreen mainScreen].bounds.size.height-_defaultTabBarHeight-((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight)) ];
     
     
     self.translatesAutoresizingMaskIntoConstraints=NO;
@@ -946,7 +955,7 @@ static int defaultBarContainerHorizontalPadding = DEFUALT_BARCONTAINER_HORIZONTA
 
 -(void)updateNeededCtBlobs
 {
-     mainViewCtBlob.btmPadding =-([UIScreen mainScreen].bounds.size.height-defaultTabBarHeight -((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight));
+     mainViewCtBlob.btmPadding =-([UIScreen mainScreen].bounds.size.height-_defaultTabBarHeight -((defaultBarContainerHeight+defaultTopContainerHeight+defaultBtmContainerHeight)+ statusBarHeight));
     
     
     
