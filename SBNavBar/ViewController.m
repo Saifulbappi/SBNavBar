@@ -12,6 +12,8 @@
 #import "SBCtBlob.h"
 #import "SBNavBarView+SBNavBarExtender.h"
 
+#import "LaAutoLayoutTestVC.h"
+
 @interface ViewController ()
 {
     
@@ -49,7 +51,7 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     
-    //[self setupExample2];
+    [self setupExample2];
     
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +80,7 @@
     
     
     
-    [self setupExampleRegView];
+    //[self setupExampleRegView];
     
     
     
@@ -282,6 +284,13 @@
 -(void)firstBtnClicked
 {
     SBNavLog(@"firstBtnClicked");
+    
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"TestSb" bundle:[NSBundle mainBundle]];
+    LaAutoLayoutTestVC * testVC = [sb instantiateViewControllerWithIdentifier:@"LaAutoLayoutTestVC"];
+    [self presentViewController:testVC animated:YES completion:nil];
+  //  [self.navigationController pushViewController:testVC animated:YES];
+    
+    
 
 }
 

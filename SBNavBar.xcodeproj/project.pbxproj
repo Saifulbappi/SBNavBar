@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4E63312D1F84B954009A76C7 /* SBCtBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E63312C1F84B954009A76C7 /* SBCtBlob.m */; };
+		4E86E2562215390500EBF7F5 /* TestSb.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E86E2552215390500EBF7F5 /* TestSb.storyboard */; };
+		4E86E2592215397C00EBF7F5 /* LaAutoLayoutTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E86E2582215397C00EBF7F5 /* LaAutoLayoutTestVC.m */; };
 		4E9E47BB1F9321CE0085C0F7 /* NewRegView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9E47B91F9321CE0085C0F7 /* NewRegView.m */; };
 		4ECB051D1F7CFF1900B3D577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB051C1F7CFF1900B3D577 /* AppDelegate.m */; };
 		4ECB05201F7CFF1900B3D577 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB051F1F7CFF1900B3D577 /* ViewController.m */; };
@@ -42,6 +44,9 @@
 		4E3EC0FE1F8CDD96009E55DE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4E63312B1F84B954009A76C7 /* SBCtBlob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBCtBlob.h; sourceTree = "<group>"; };
 		4E63312C1F84B954009A76C7 /* SBCtBlob.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBCtBlob.m; sourceTree = "<group>"; };
+		4E86E2552215390500EBF7F5 /* TestSb.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestSb.storyboard; sourceTree = "<group>"; };
+		4E86E2572215397C00EBF7F5 /* LaAutoLayoutTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaAutoLayoutTestVC.h; sourceTree = "<group>"; };
+		4E86E2582215397C00EBF7F5 /* LaAutoLayoutTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaAutoLayoutTestVC.m; sourceTree = "<group>"; };
 		4E9E47B91F9321CE0085C0F7 /* NewRegView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRegView.m; sourceTree = "<group>"; };
 		4E9E47BA1F9321CE0085C0F7 /* NewRegView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRegView.h; sourceTree = "<group>"; };
 		4ECB05181F7CFF1900B3D577 /* SBNavBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBNavBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,11 +123,14 @@
 				4ECB051C1F7CFF1900B3D577 /* AppDelegate.m */,
 				4ECB051E1F7CFF1900B3D577 /* ViewController.h */,
 				4ECB051F1F7CFF1900B3D577 /* ViewController.m */,
+				4E86E2552215390500EBF7F5 /* TestSb.storyboard */,
 				4ECB05211F7CFF1900B3D577 /* Main.storyboard */,
 				4ECB05241F7CFF1900B3D577 /* Assets.xcassets */,
 				4ECB05261F7CFF1900B3D577 /* LaunchScreen.storyboard */,
 				4ECB05291F7CFF1900B3D577 /* Info.plist */,
 				4ECB052A1F7CFF1900B3D577 /* main.m */,
+				4E86E2572215397C00EBF7F5 /* LaAutoLayoutTestVC.h */,
+				4E86E2582215397C00EBF7F5 /* LaAutoLayoutTestVC.m */,
 			);
 			path = SBNavBar;
 			sourceTree = "<group>";
@@ -257,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ECB05281F7CFF1900B3D577 /* LaunchScreen.storyboard in Resources */,
+				4E86E2562215390500EBF7F5 /* TestSb.storyboard in Resources */,
 				4ECB05251F7CFF1900B3D577 /* Assets.xcassets in Resources */,
 				4ECB75DD1F8A2F99007334D4 /* back_button.png in Resources */,
 				4ECB05231F7CFF1900B3D577 /* Main.storyboard in Resources */,
@@ -280,6 +289,7 @@
 			files = (
 				4ECB05201F7CFF1900B3D577 /* ViewController.m in Sources */,
 				4ECB75D11F8A0A33007334D4 /* SampleLeftBarContainerView.m in Sources */,
+				4E86E2592215397C00EBF7F5 /* LaAutoLayoutTestVC.m in Sources */,
 				4E9E47BB1F9321CE0085C0F7 /* NewRegView.m in Sources */,
 				4ECB052B1F7CFF1900B3D577 /* main.m in Sources */,
 				4ECB051D1F7CFF1900B3D577 /* AppDelegate.m in Sources */,
